@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom manipulasi node dan css flex-box</title>
+    <style>
+        /* css reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font: 10px 'poppins', sans-serif;
+        }
+
+        body {
+            background-color: #233535;
+        }
+
+        .container {
+            width: 95%;
+            margin: 30px auto;
+        }
+
+        .cards {
+            padding: 10px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            overflow: hidden;
+            width: 23%;
+            padding: 10px;
+            margin: 20px;
+            background-color: #e1e4e7;
+            border-radius: 10px;
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+            text-align: center;
+            transition: all 300ms ease-in;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        img {
+            border-radius: 10px;
+        }
+
+        h5 {
+            padding: 10px 0 0 0;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        li {
+            list-style: none;
+            font-size: 1.8rem;
+            margin: 2px 0 0 0;
+        }
+
+        .list1 {
+            color: #fa9805;
+        }
+
+        button {
+            width: 100px;
+            padding: 5px;
+            margin: 25px 0 15px 0;
+            background-color: #233535;
+            color: wheat;
+            outline: none;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 400ms ease-in-out;
+        }
+
+        button:hover {
+            box-shadow: inset 0px 50px 0 #fa98059f;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container" class="container">
+
+    </div>
+
+    <script>
+        // seleksi elemen container
+        const container = document.getElementById('container');
+        const divCards = document.createElement('div');
+        container.appendChild(divCards);
+        divCards.classList.add('cards');
+
+        // membuat array yang isi berupa objek
+
+        const barang =
+            [
+                {
+                    id: 1,
+                    nama: 'kaos',
+                    kategori: 'baju',
+                    harga: 1000000,
+                    rate: '⭐⭐⭐⭐⭐'
+                },
+                {
+                    id: 2,
+                    nama: 'jeans',
+                    kategori: 'celana',
+                    harga: 3000000,
+                    rate: '⭐⭐⭐'
+                },
+                {
+                    id: 3,
+                    nama: 'sepatu',
+                    kategori: 'alas kaki',
+                    harga: 500000,
+                    rate: '⭐⭐⭐⭐'
+                },
+                {
+                    id: 4,
+                    nama: 'topi jerami',
+                    kategori: 'penutup kepala',
+                    harga: 60000,
+                    rate: '⭐⭐⭐⭐⭐'
+                },
+                {
+                    id: 5,
+                    nama: 'celana dalam pria',
+                    kategori: 'pakaian pribadi',
+                    harga: 50000,
+                    rate: '⭐'
+                },
+                {
+                    id: 6,
+                    nama: 'kemeja flanel',
+                    kategori: 'kemeja',
+                    harga: 175000,
+                    rate: '⭐⭐'
+                },
+                {
+                    id: 7,
+                    nama: 'kaos kaki',
+                    kategori: 'alas kaki',
+                    harga: 45000,
+                    rate: '⭐⭐⭐'
+                },
+            ]
+
+        // looping
+        barang.forEach((e, i) => {
+
+            // membuat elemen
+            const divCard = document.createElement('div');
+            const img = document.createElement('img');
+            const h5 = document.createElement('h5');
+            const ul = document.createElement('ul');
+            const button = document.createElement('button');
+
+            // menambahkan elemen baru dibawah elemen sebelumnya
+            divCards.appendChild(divCard);
+            divCard.appendChild(img);
+            divCard.appendChild(h5);
+            divCard.appendChild(ul);
+            divCard.appendChild(button);
+
+            // menambahkan class
+            divCard.classList.add('card');
+
+            // menambahkan atribut pada element img
+            img.setAttribute('src', './img/' + i + '.jpg');
+            img.setAttribute('width', '100%');
+
+
+
+            h5.innerHTML = barang[i].nama;
+            for (let i = 0; i < 3; i++) {
+                const li = document.createElement('li');
+                const tLi = document.createTextNode(barang[i].id);
+                ul.appendChild(li);
+                li.appendChild(tLi);
+                li.classList.add(`list${[i]}`);
+
+            }
+            button.innerHTML = 'Beli';
+        });
+
+
+        // seleksi elemen yang telah dibuat
+        const cards = document.querySelector('cards');
+        const card = document.querySelector('card');
+        const tagUl = document.querySelectorAll('ul');
+        const tagLi = document.querySelectorAll('ul li');
+        const list0 = document.querySelectorAll('ul li:nth-child(1)');
+        const list1 = document.querySelectorAll('ul li:nth-child(2)');
+        const list2 = document.querySelectorAll('ul li:nth-child(3)');
+
+
+        // looping
+        list0.forEach((e, i) => {
+            e.innerHTML = barang[i].kategori;
+        })
+
+        list1.forEach((e, i) => {
+            e.innerHTML = barang[i].harga;
+        })
+        list2.forEach((e, i) => {
+            e.innerHTML = barang[i].rate;
+        })
+
+    </script>
+</body>
+
+</html>
